@@ -4,8 +4,9 @@ game.resources = [
 	 * @example
 	 * {name: "example", type:"image", src: "data/img/example.png"},
 	 */
+        //this code below loads the background tiles images for making our map in tiled
         {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
-        
+        //this code below loads the meta tiles to make our map in tiles
         {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
 
 	/* Atlases 
@@ -18,7 +19,8 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.tmx"},
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
-        {name: "map", type: "tmx", src: "data/map/map.tmx"},
+        //this code below lets us load or map we made in tiled
+        {name: "map", type: "tmx", src: "data/map/map.tmx"}
 
 
 	/* Background music. 
