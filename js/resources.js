@@ -8,7 +8,8 @@ game.resources = [
         {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
         //this code below loads the meta tiles to make our map in tiles
         {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
-
+        //this code below loads the player into our map
+        {name: "player", type:"image", src: "data/img/orcSpear.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},

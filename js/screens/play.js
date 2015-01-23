@@ -5,8 +5,11 @@ game.PlayScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		// reset the score
 		game.data.score = 0;
-                
+                //this code below made our map show up in melon.js
                 me.levelDirector.loadLevel("map");
+                
+                var player = me.pool.pull("player", 0, 420, {});
+                me.game.world.addChild(player, 5);
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();

@@ -12,7 +12,8 @@ var game = {
 	// Run on page load.
 	"onload" : function () {
 	// Initialize the video.
-	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, '1.0')) {
+        //we changed the 480, 320 to 1060, by 600 the 'auto' to '1.0'.
+	if (!me.video.init("screen",  me.video.CANVAS, 1060, 600, true, '1.0')) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
 	}
@@ -39,6 +40,8 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
+                me.pool.register("player", game.PlayerEntity, true);
+            
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
