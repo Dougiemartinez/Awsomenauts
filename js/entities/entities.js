@@ -11,7 +11,7 @@ game.PlayerEntity = me.Entity.extend({
                     return(new me.Rect(0, 0, 64, 64)).toPolygon();
                 }
         }]);
-    //this code changes the x and y values of our player
+    //this code changes the x and y values of our player 
         this.body.setVelocity(5, 20);
     
     },
