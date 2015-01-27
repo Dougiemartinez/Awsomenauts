@@ -26,11 +26,13 @@ game.PlayerEntity = me.Entity.extend({
             //adds to the position of my ex by adding the velocity defined above in Setvelocity() and multiplying it by
             //me.timer.tick. makes the movement look smooth
             this.body.vel.x += this.body.accel.x * me.timer.tick;
+            //this code flips our players direction
             this.flipX(true);
         }else{
             this.body.vel.x = 0;
         }
         if(this.body.vel.x !== 0){
+            //this code sets the animation to walk and to stop
         if(!this.renderable.isCurrentAnimation("walk")){
            this.renderable.setCurrentAnimation("walk");
         }
