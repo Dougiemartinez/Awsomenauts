@@ -13,9 +13,11 @@ game.PlayerEntity = me.Entity.extend({
         }]);
     //this code changes the x and y values of our player 
         this.body.setVelocity(5, 20);
+        //this code makes the screen follow my player
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
            
         this.renderable.addAnimation("idle", [78]);
+        //this code sets the images for how our player moves on the game
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
         
         this.renderable.setCurrentAnimation("idle");
@@ -23,6 +25,7 @@ game.PlayerEntity = me.Entity.extend({
     },
     
     update: function(delta){
+        //makes our player move to the right when we click on the right key
         if(me.input.isKeyPressed("right")){
             //adds to the position of my ex by adding the velocity defined above in Setvelocity() and multiplying it by
             //me.timer.tick. makes the movement look smooth
@@ -67,7 +70,7 @@ game.PlayerBaseEntity = me.Entity.extend({
             this.body.onCollision = this.onCollision.bind(this);
         
             this.type = "PlayerBaseEntity";
-            
+            //loads our image for the player base
             this.renderable.addAnimation("idle", [0]);
             this.renderable.addAnimation("broken", [1]);
             this.renderable.setCurrentAnimation("idle");
@@ -108,7 +111,7 @@ game.EnemyBaseEntity = me.Entity.extend({
             this.body.onCollision = this.onCollision.bind(this);
         
             this.type = "EnemyBaseEntity";
-            
+            // makes the enemy base appear broken on the enamy side
             this.renderable.addAnimation("idle", [0]);
             this.renderable.addAnimation("broken", [1]);
             this.renderable.setCurrentAnimation("idle");
