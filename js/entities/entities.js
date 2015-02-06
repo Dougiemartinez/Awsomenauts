@@ -19,23 +19,36 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.addAnimation("idle", [78]);
         //this code sets the images for how our player moves on the game
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-        
+        this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
         this.renderable.setCurrentAnimation("idle");
-    
-    },
-    
-    update: function(delta){
-        //makes our player move to the right when we click on the right key
+    }
+    }
+        
+    } update: function(delta){
         if(me.input.isKeyPressed("right")){
-            //adds to the position of my ex by adding the velocity defined above in Setvelocity() and multiplying it by
-            //me.timer.tick. makes the movement look smooth
-            this.body.vel.x += this.body.accel.x * me.timer.tick;
-            //this code flips our players direction
-            this.flipX(true);
-        }else{
-            this.body.vel.x = 0;
-        }
-        if(this.body.vel.x !== 0){
+        //makes our player move to the right when we click on the right key      
+        //adds to the position of my ex by adding the velocity defined above in Setvelocity() and multiplying it by
+        //me.timer.tick. makes the movement look smooth
+        //this code flips our players direction
+        this.body.vel.x += this.body.accel.x * me.timer.tick;           
+        this.flipX(true);
+    }else if (me.input.isKeyPressed("left")){
+        this.body.vel.x -=this.body.accel.x * me.timer.tick;
+        this.flipX(false);
+    }else{ 
+         this.body.vel.x = 0;
+    }
+        
+    if(me.input.isKeyPressed("jump")){  && !this.jumping && !this.falling}{
+        this.body.jumping = true;
+        this.body.vel.y -= this.body.accel.y * me.timer.tick;
+        }       
+                 
+    if(me.input.isKeyPressed("attack")){
+        if{!this.renderable.isCurrentAnimation()
+         
+        
+       else if(this.body.vel.x !== 0){
             //this code sets the animation to walk and to stop
         if(!this.renderable.isCurrentAnimation("walk")){
            this.renderable.setCurrentAnimation("walk");
@@ -44,6 +57,12 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.setCurrentAnimation("idle")
         
     }
+    
+    if(me.input.isKeyPressed("right")){
+            if(!this.renderable.isCurrentanimation("attack")){
+                this.renderable.serCurrentAnimation("attack", "idle");
+                this.renderable.setanimationFrame();
+            }
         this.body.update(delta);
         
         this._super(me.Entity, "update", [delta]);
@@ -61,7 +80,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
             }]);
             this.broken = false;
@@ -102,7 +121,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
             }]);
             this.broken = false;
