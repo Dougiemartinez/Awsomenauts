@@ -1,74 +1,42 @@
-/* Game namespace */
-var game = {
+game.PlayScreen = me.ScreenObject.extend({
+	/**
+	 *  action to perform on state change
+	 */
+	onResetEvent: function() {
+		// reset the score
+		game.data.score = 0;
 
-	// an object where to store game information
-	data : {
-		// score
-		score : 0,
-		//applies various healths, speeds and timers to certain aspects of the game
-		EnemyBaseHealth: 10,
-		PlayerBaseHealth: 10,
-		enemyCreepHealth: 10,
-		playerHealth: 10,
-		enemyCreepAttack: 1,
-		playerAttack: 1,
-		// orcBaseDamage: 10,
-		// orcBaseHealth: 100,
-		// orcBaseSpeed: 3,
-		// orcBaseDefense: 0,
-		playerAttackTimer: 1000,
-		enemyCreepAttackTimer: 1000,
-		playerMoveSpeed: 10,
-		enemyMoveSpeed: 5,
-		gameManager: "",
-		player: ""
+		//loads the level
+		me.levelDirector.loadLevel("map");
 
+		this.resetPlayer(0, 420);
+
+		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+		me.game.world.addChild(gamemanager, 0);
+
+		//creates action for a key
+		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		me.input.bindKey(me.input.KEY.A, "attack");
+		me.input.bindKey(me.input.KEY.LEFT, "left");
+		me.input.bindKey(me.input.KEY.UP, "jump");
+		
+		// add our HUD to the game world
+		this.HUD = new game.HUD.Container();
+		me.game.world.addChild(this.HUD);
 	},
-	
-	
-	// Run on page load.
-	"onload" : function () {
-	// Initialize the video.
-	// Sets the width and height of the screen
-	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, 'auto')) {
-		alert("Your browser does not support HTML5 canvas.");
-		return;
+
+
+	/**
+	 *  action to perform when leaving this screen (state change)
+	 */
+	onDestroyEvent: function() {
+		// remove the HUD from the game world
+		me.game.world.removeChild(this.HUD);
+	},
+
+	resetPlayer: function(x, y){
+		//sets position for player
+		game.data.player = me.pool.pull("player", x, y, {});
+		me.game.world.addChild(game.data.player, 5);
 	}
-
-	// add "#debug" to the URL to enable the debug Panel
-	if (document.location.hash === "#debug") {
-		window.onReady(function () {
-			me.plugin.register.defer(this, debugPanel, "debug");
-		});
-	}
-
-	// Initialize the audio.
-	me.audio.init("mp3,ogg");
-
-	// Set a callback to run when loading is complete.
-	me.loader.onload = this.loaded.bind(this);
-
-	// Load the resources.
-	me.loader.preload(game.resources);
-
-	// Initialize melonJS and display a loading screen.
-	me.state.change(me.state.LOADING);
-},
-
-	// Run on game resources loaded.
-	"loaded" : function () {
-		//registers the player in the game
-		me.pool.register("player", game.PlayerEntity, true);
-		me.pool.register("PlayerBase", game.PlayerBaseEntity);
-		me.pool.register("EnemyBase", game.EnemyBaseEntity);
-		me.pool.register("EnemyCreep", game.EnemyCreep, true);
-		me.pool.register("GameManager", game.GameManager);
-
-
-		me.state.set(me.state.MENU, new game.TitleScreen());
-		me.state.set(me.state.PLAY, new game.PlayScreen());
-
-		// Start the game.
-		me.state.change(me.state.PLAY);
-	}
-};
+});
