@@ -270,7 +270,7 @@ game.EnemyCreep = me.Entity.extend({
 			width: 32,
 			//sets aside a height of 64 pixels for the sprite
 			height: 64,
-			//gives the sprite a width of 32 
+		 	//gives the sprite a width of 32 
 			spritewidth : "32",
 			//gives the sprite a width of 64
 			spriteheight: "64",
