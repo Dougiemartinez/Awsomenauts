@@ -207,7 +207,8 @@ game.EnemyCreep = me.Entity.extend({
     this.renderable.addAnimation("walk", [3, 4, 5], 80);
     this.renderable.setCurrentAnimation("walk");
     }
-})
+});
+
 //tower class
 game.EnemyBaseEntity = me.Entity.extend({
 	init: function(x, y, settings){
@@ -266,7 +267,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		
 	}
 });
-
+//controlls creep timer
 game.GameManager = Object.Extend({
     init: function(x, y, settings){
         this.now = new Date().getTime();
