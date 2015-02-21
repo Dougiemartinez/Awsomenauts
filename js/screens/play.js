@@ -5,22 +5,23 @@ game.PlayScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		// reset the score
 		game.data.score = 0;
-                //this code below made our map show up in melon.js
-                me.levelDirector.loadLevel("map");
-                
-                var player = me.pool.pull("player", 0, 420, {});
-                me.game.world.addChild(player, 5);
-                
-                var gamemanager = me.pool.pull("GameManager", 0, 0, {});
-                me.game.world.addChild(gamemanager, 0);
-                
-                //this moves our player to the right when we push the right arrow key
-                me.input.bindKey(me.input.KEY.RIGHT, "right");
-                me.input.bindKey(me.input.KEY.LEFT, "left");
-                me.input.bindKey(me.input.KEY.SPACE, "jump");
-                me.input.bindKey(me.input.KEY.A, "attack");
-                    
 
+		//loads the level
+		me.levelDirector.loadLevel("map");
+
+		//sets position for player
+		var player = me.pool.pull("player", 0, 420, {});
+		me.game.world.addChild(player, 5);
+
+		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+		me.game.world.addChild(gamemanager, 0);
+
+		//creates action for a key
+		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		me.input.bindKey(me.input.KEY.A, "attack");
+		me.input.bindKey(me.input.KEY.LEFT, "left");
+		me.input.bindKey(me.input.KEY.UP, "jump");
+		
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
