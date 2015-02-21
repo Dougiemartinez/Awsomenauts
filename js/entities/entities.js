@@ -125,9 +125,6 @@ game.PlayerEntity = me.Entity.extend ({
 	   }
            
 });
-
-
-
 //tower class
 game.PlayerBaseEntity = me.Entity.extend({
 	init: function(x, y, settings){
@@ -188,7 +185,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 	}
 });
 //creep class
-game.EnemyBaseEntity = me.Entity.extend({
+game.EnemyCreep = me.Entity.extend({
     init: function(x, y, settings){
         this._super(me.Entity, 'init', [x, y, {
                 image: "creep1",
@@ -203,7 +200,7 @@ game.EnemyBaseEntity = me.Entity.extend({
     this.health = 10;
     this.alwaysUpdate = true;
     
-    this.setVelocity(3, 20);
+    this.body.setVelocity(3, 20);
     
     this.type = "EnemyCreep";
     
@@ -211,10 +208,6 @@ game.EnemyBaseEntity = me.Entity.extend({
     this.renderable.setCurrentAnimation("walk");
     }
 })
-
-
-
-
 //tower class
 game.EnemyBaseEntity = me.Entity.extend({
 	init: function(x, y, settings){
@@ -272,4 +265,26 @@ game.EnemyBaseEntity = me.Entity.extend({
 	onCollision: function(){
 		
 	}
+});
+
+game.GameManager = Object.Extend({
+    init: function(x, y, settings){
+        this.now = new Date().getTime();
+        this.lastCreep = new Date().getTime();
+        
+        this.alwaysUpdate = true;
+    },
+    
+    update: function(){
+        this.now = new Date().getTime();
+        
+        if(Math.round(this.now/1000)%10 ===0(this.now - this.lastCreep >= 1000)){
+            this.lastCreep = this.now;
+            var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+            me.game.world.addChild(creepe, 5);
+        }
+        
+        return true;
+    }
+    
 });
