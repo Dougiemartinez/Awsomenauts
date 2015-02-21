@@ -360,7 +360,6 @@ game.GameManager = Object.extend({
 		//keeps the function updating
 		this.alwaysUpdate = true;
 	},
-// player's class
 
 
 
