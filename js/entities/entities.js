@@ -2,7 +2,7 @@
 game.PlayerEntity = me.Entity.extend ({
 	//constructor function 
 	init: function(x, y, settings){
-		//reachers the constructor function for enitity
+		//reaches the constructor function for enitity
 		this._super(me.Entity, 'init', [x, y, {
 			//settings. shoes the player
 			image: "player",
