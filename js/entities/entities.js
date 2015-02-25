@@ -33,6 +33,7 @@ game.PlayerEntity = me.Entity.extend ({
 		this.lastHit = this.now;
 		//declares that player isn't dead 
 		this.dead = false;
+                this.attack = game.data.playerAttack;
 		//keeps the player from attacking multiple times
 		this.lastAttack = new Date().getTime();
 		//makesit so the player is always on the screen
@@ -161,6 +162,12 @@ game.PlayerEntity = me.Entity.extend ({
 			if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer) {
 				//so the computer knows th eplayer just hit the tower
 				this.lastHit = this.now;
+                                //if the creeps health is less than our attack, execute code in if statement
+                                if(response.b.health <= game.data.playerAttack){
+                                    //ads one gold for a creep kill
+                                    game.data.gold += 1;
+                                    console.log("Current gold: " + game.data.gold);
+                                }
 				//calls the loseHealth function
 				response.b.loseHealth(game.data.playerAttack);
 			}
@@ -199,69 +206,7 @@ game.PlayerEntity = me.Entity.extend ({
 });
 
 //tower class
-game.PlayerBaseEntity = me.Entity.extend({
-	init: function(x, y, settings){
-		//reachers the constructor function for tower
-		this._super(me.Entity, 'init', [x, y, {
-			//settings. shoes the tower
-			image: "tower",
-			//sets aside a width of 100 pixels for the tower
-			width: 100,
-			//sets aside a height of 100 pixels for the tower
-			height: 100,
-			//gives the tower a width of 100. 
-			spritewidth : "100",
-			//gives the tower a width of 100
-			spriteheight: "100",
-			getShape: function(){
-				//returns a rectangle of what the tower walks into
-				return(new me.Rect(0, 0, 100, 60)).toPolygon();
-			}
-		}]);
-		//says that tower hasn't been destroyed
-		this.broken = false;
-		//gives tower a "health" of ten
-		this.health = game.data.playerBaseHealth;
-		//makes sure the tower's status is always updating, eben when it isn't on the map
-		this.alwaysUpdate = true;
-		//makes teh tower collidable
-		this.body.onCollision = this.onCollision.bind(this);
-		//checks what player is running into
-		this.type = "PlayerBase";
-		//adds the defualt animatin for the game
-		this.renderable.addAnimation("idle", [0]);
-		//adds the animation for when the tower is broken
-		this.renderable.addAnimation("broken", [1]);
-		//sets the desfault animation
-		this.renderable.setCurrentAnimation("idle");
 
-	},	
-
-
-	update:function(delta){
-		//runs if health is less than or equal to 0
-		if(this.health <= 0){
-			//makes the tower "broken"
-			this.broken = true;
-			//sets animation for "broken"
-			this.renderable.setCurrentAnimation("broken");
-		} 
-		//updates tower status
-		this.body.update(delta);
-		//updates
-		this._super(me.Entity, "update", [delta]);
-		return true;
-	},
-	//runs whenever called on
-	loseHealth: function(damage){
-		//subtracts set damage amount from health everytime ran
-		this.health = this.health - damage;
-	},
-	//function that runs when base is touched
-	onCollision: function(){
-
-	}
-});
 
 //tower class
 game.EnemyBaseEntity = me.Entity.extend({
@@ -375,7 +320,7 @@ game.EnemyCreep = me.Entity.extend({
 		//delta is the change in time that's happening
 		update: function(delta){
 			//logs what the enemy creeps health is
-			console.log(this.health);
+			
 			if(this.health <= 0){
 				me.game.world.removeChild(this);
 			}
@@ -518,39 +463,6 @@ game.EnemyCreep = me.Entity.extend({
 // });
 
 //class that runs all the timers and things that aren't inside any of the other entities
-game.GameManager = Object.extend({
-	//constructor function
-	init: function(x, y, settings){
-		//sets timer
-		this.now = new Date().getTime();
-		//keeps track of last time creep was made
-		this.lastCreep = new Date().getTime();
-		//keeps the function updating
-		this.alwaysUpdate = true;
-	},
 
-	update: function(){
-		//keeps track of timer
-		this.now = new Date().getTime();
-
-		if(game.data.player.dead){
-			me.game.world.removeChild(game.data.player);
-			me.state.current().resetPlayer(10, 0);
-		}
-
-		//checks to make sure there is a multiple of ten. makes sure its been at least a second since last creep has been made
-		if(Math.round(this.now/1000)%10 === 0 && (this.now - this.lastCreep >= 1000)){
-			//updates timer
-			this.lastCreep = this.now;
-			//creates and inserts creep into worls
-			var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
-			//adds the creeps to the worls
-			me.game.world.addChild(creepe, 5);
-		}
-
-		//updates
-		return true;
-	}
-});
 	
 	
