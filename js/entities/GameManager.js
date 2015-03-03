@@ -30,5 +30,3 @@ game.GameManager = Object.extend({
 		return true;
 	}
 });
-
-

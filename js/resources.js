@@ -25,7 +25,7 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
         //this code below lets us load or map we made in tiled
-        {name: "map", type: "tmx", src: "data/map/map.tmx"}
+        {name: "map", type: "tmx", src: "data/map/untitled.tmx"}
 
 
 	/* Background music. 
