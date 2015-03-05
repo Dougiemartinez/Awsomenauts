@@ -17,8 +17,10 @@ game.PlayScreen = me.ScreenObject.extend({
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0 , 0, {});
                 me.game.world.addChild(gameTimeManager, 0);
                 
-                var heroDeathManager = me.pool.pull("HeroDeathManager", 0 , 0, {});
-                me.game.world.addChild(heroDeathManager, 0);
+                var experienceManager = me.pool.pull("ExperienceManager", 0 , 0, {});
+                me.game.world.addChild(experienceManager, 0);
+                
+                var experienceManager = me.pool.pull
 		//puts gamemanager into world
 		me.game.world.addChild(gamemanager, 0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
