@@ -14,7 +14,11 @@ game.PlayScreen = me.ScreenObject.extend({
 		//calls the resetPlayer function with the parameters 0 and 420
 		this.resetEnemy(900, 420);
 		//adds gamemanager to world
-		var gamemanager = me.pool.pull("GameManager", 0 , 0, {});
+		var gameTimerManager = me.pool.pull("GameTimerManager", 0 , 0, {});
+                me.game.world.addChild(gameTimeManager, 0);
+                
+                var heroDeathManager = me.pool.pull("HeroDeathManager", 0 , 0, {});
+                me.game.world.addChild(heroDeathManager, 0);
 		//puts gamemanager into world
 		me.game.world.addChild(gamemanager, 0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

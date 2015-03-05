@@ -28,13 +28,13 @@
 		<script type="text/javascript" src="js/resources.js"></script>
 
 		<script type="text/javascript" src="js/entities/entities.js"></script>
-                //links the EnemyBaseEntity file
+              
                 <script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
-                //links the PlayerBaseEntity file
+             
                 <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
-                //links the GameManager file
+          
                 <script type="text/javascript" src="js/entities/GameManager.js"></script>
-                //links the EnemyCreep file
+             
                 <script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
 
