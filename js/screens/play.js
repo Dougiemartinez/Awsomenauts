@@ -8,21 +8,21 @@ game.PlayScreen = me.ScreenObject.extend({
 
 
 		//loads level
-		me.levelDirector.loadLevel("untitled");
+		me.levelDirector.loadLevel("map");
 		//calls the resetPlayer function with the parameters 0 and 420
 		this.resetPlayer(0, 420);
 		//calls the resetPlayer function with the parameters 0 and 420
-		this.resetEnemy(900, 420);
+		//this.resetEnemy(900, 420);
 		//adds gamemanager to world
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0 , 0, {});
-                me.game.world.addChild(gameTimeManager, 0);
+                me.game.world.addChild(gameTimerManager, 0);
                 
                 var experienceManager = me.pool.pull("ExperienceManager", 0 , 0, {});
                 me.game.world.addChild(experienceManager, 0);
                 
                 var experienceManager = me.pool.pull
 		//puts gamemanager into world
-		me.game.world.addChild(gamemanager, 0);
+		//me.game.world.addChild(gamemanager, 0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//enemy hero hack
 
@@ -71,14 +71,15 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.player = me.pool.pull("player", x, y, {});
 		//adds him to the game and sets his layer-level
 		me.game.world.addChild(game.data.player, 5);
-	},
+	}
 
+        /*
 	resetEnemy: function(x, y){
 		//pulls the player entity from the pool
-		game.data.enemyHero = me.pool.pull("enemyHero", x, y, {});
+		//game.data.enemyHero = me.pool.pull("enemyHero", x, y, {});
 		//adds him to the game and sets his layer-level
 		me.game.world.addChild(game.data.enemyHero, 5);
-	},
+	},*/
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//pause hack
 	// pausedGame: function(){
