@@ -39,14 +39,14 @@ game.EnemyCreep = me.Entity.extend({
 			this.renderable.setCurrentAnimation("walk");
 		},
 
-		loseHealth: function(damage){
+		//subtracts health from enemy creep
+		loseHealth: function(damage) {
 			this.health = this.health - damage;
 		},
 
 		//delta is the change in time that's happening
 		update: function(delta){
-			//logs what the enemy creeps health is
-			
+			//removes enemy creep sprtites once their health is at zero
 			if(this.health <= 0){
 				me.game.world.removeChild(this);
 			}
@@ -61,6 +61,7 @@ game.EnemyCreep = me.Entity.extend({
 			this._super(me.Entity, "update", [delta]);
 			return true;
 		},
+		
 		//function for creeps' collisions
 		collideHandler: function(response){
 			//runs if creep collides with tower 
@@ -74,7 +75,7 @@ game.EnemyCreep = me.Entity.extend({
 				//pushes the creep back a little to maintain its position
 				this.pos.x = this.pos.x + 1;
 				//Only allows the creep to hit the tower once every second
-				if ((this.now - this.lastHit >= 1000)) {
+				if ((this.now - this.lastHit >= game.data.creepAttackTimer)) {
 					//updates the lastHit timer
 					this.lastHit = this.now;
 					//runs the losehealth function, with 1 point damage
@@ -97,7 +98,7 @@ game.EnemyCreep = me.Entity.extend({
 					this.pos.x = this.pos.x + 1;
 				}
 				//Only allows the creep to hit the tower once every second and if the player is not behind the creep
-				if ((this.now - this.lastHit >= 1000) && xdif > 0) {
+				if ((this.now - this.lastHit >= game.data.creepAttackTimer) && xdif > 0) {
 					//updates the lastHit timer
 					this.lastHit = this.now;
 					//runs the losehealth function, with 1 point damage
@@ -107,4 +108,3 @@ game.EnemyCreep = me.Entity.extend({
 		}
 	
 });
-
