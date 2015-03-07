@@ -8,9 +8,9 @@ var game = {
 		paused: false,
 		enemyBaseHealth : 10,
 		playerBaseHealth: 10,
-		enemyCreepHealth: 10,
+		enemyCreepHealth: 5,
 		playerHealth: 10,
-		friendCreepHealth: 10,
+		friendCreepHealth: 5,
 		enemyCreepAttack: 1,
 		friendCreepAttack: 1,
 		playerAttack: 1,
@@ -18,17 +18,18 @@ var game = {
 		creepAttackTimer: 1000,
 		playerMoveSpeed: 8,
 		creepMoveSpeed: 5,
-		gameTimerManager: "",
-                heroDeathManager: "",
+		gameTimeManager: "",
+		HeroDeathManager: "",
 		player: "",
-		enemyHero: "",
-		auseScreen: "",
+		EnemyHero: "",
+		pauseScreen: "",
 		exp: 0,
 		gold: 0,
 		exp1: 0,
 		exp2: 0,
 		exp3: 0,
-		exp4: 0
+		exp4: 0,
+		win: 0
 	},
 	
 	
@@ -47,6 +48,8 @@ var game = {
 			me.plugin.register.defer(this, debugPanel, "debug");
 		});
 	}
+	//creates a place to save these 5 variables
+	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
@@ -75,12 +78,12 @@ var game = {
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		//adds friend creep to pool
 		me.pool.register("FriendCreep", game.FriendCreep, true);
-		//registers oblject
-		me.pool.register("GameTimerManager", game.GameTimerManager);
-                //registers Heros Deth
-                me.pool.register("HeroDeathManager", game.HeroDeathManager);
-                //registers experience manager
-                me.pool.register("ExperienceManager", game.ExperienceManager);
+		//registers GameTimeManager
+		me.pool.register("GameTimeManager", game.GameTimeManager);
+		//registers Manager
+		me.pool.register("HeroDeathManager", game.HeroDeathManager);
+		//registers GameTimeManager
+		me.pool.register("ExperienceManager", game.ExperienceManager);		
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

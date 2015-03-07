@@ -12,17 +12,21 @@ game.PlayScreen = me.ScreenObject.extend({
 		//calls the resetPlayer function with the parameters 0 and 420
 		this.resetPlayer(0, 420);
 		//calls the resetPlayer function with the parameters 0 and 420
-		//this.resetEnemy(900, 420);
+		this.resetEnemy(900, 420);
 		//adds gamemanager to world
-		var gameTimerManager = me.pool.pull("GameTimerManager", 0 , 0, {});
-                me.game.world.addChild(gameTimerManager, 0);
-                
-                var experienceManager = me.pool.pull("ExperienceManager", 0 , 0, {});
-                me.game.world.addChild(experienceManager, 0);
-                
-                var experienceManager = me.pool.pull
+		var heroDeathManager = me.pool.pull("HeroDeathManager", 0 , 0, {});
 		//puts gamemanager into world
-		//me.game.world.addChild(gamemanager, 0);
+		me.game.world.addChild(heroDeathManager, 0);
+
+		//adds gamemanager to world
+		var gameTimeManager = me.pool.pull("GameTimeManager", 0 , 0, {});
+		//puts gamemanager into world
+		me.game.world.addChild(gameTimeManager, 0);
+
+		//adds gamemanager to world
+		var ExperienceManager = me.pool.pull("ExperienceManager", 0 , 0, {});
+		//puts gamemanager into world
+		me.game.world.addChild(ExperienceManager, 0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//enemy hero hack
 
@@ -33,7 +37,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		//makes the W key into a variable
 		me.input.bindKey(me.input.KEY.W, "jump");
 		//makes an attack key
-		me.input.bindKey(me.input.KEY.V, "attack");
+		me.input.bindKey(me.input.KEY.C, "attack");
 		//Makes the right key into a variable
 		me.input.bindKey(me.input.KEY.RIGHT, "rights");
 		//makes the right key into a variable
@@ -71,15 +75,14 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.player = me.pool.pull("player", x, y, {});
 		//adds him to the game and sets his layer-level
 		me.game.world.addChild(game.data.player, 5);
-	}
+	},
 
-        /*
 	resetEnemy: function(x, y){
 		//pulls the player entity from the pool
-		//game.data.enemyHero = me.pool.pull("enemyHero", x, y, {});
+		game.data.enemyHero = me.pool.pull("enemyHero", x, y, {});
 		//adds him to the game and sets his layer-level
 		me.game.world.addChild(game.data.enemyHero, 5);
-	},*/
+	},
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//pause hack
 	// pausedGame: function(){
@@ -87,6 +90,16 @@ game.PlayScreen = me.ScreenObject.extend({
 	// 		me.state.change(me.state.PAUSE);
 	// 	}
 	// }
+	//pauseGame: function(){
+		// this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){
+		// 		//runs if enter button is pressed
+		// 		if (action === "pause") {
+		// 			//goes to play screen
+		// 			me.state.change(me.state.PAUSE);
+		// 		}
+		// });
+		//me.state.change(me.state.PAUSE);
+	//}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 });
