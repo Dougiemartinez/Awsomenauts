@@ -19,7 +19,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			//function that sets up the writing
 			draw: function(renderer){
 				//inserts the message "Awesomenauts!" and sets where writing starts
-				this.font.draw(renderer.getContext(), "START A NEW GAME!", this.pos.x, this.pos.y);
+				this.font.draw(renderer.getContext(), "Press Enter To Pay", this.pos.x, this.pos.y);
 			},
 
 			update: function(dt){
@@ -54,7 +54,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			//function that sets up the writing
 			draw: function(renderer){
 				//inserts the message "Awesomenauts!" and sets where writing starts
-				this.font.draw(renderer.getContext(), "CONTINUE!", this.pos.x, this.pos.y);
+				this.font.draw(renderer.getContext(), "AWESOMENAUTS", this.pos.x, this.pos.y);
 			},
 
 			update: function(dt){
@@ -73,7 +73,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				//gets rid of the mouse as an object
 				me.input.releasePointerEvent('pointerdown', this);
 				//sets screen to play screen
-				me.state.change(me.state.PLAY);
+				me.state.change(me.state.SPENDEXP);
 			}
 		})));
 		
