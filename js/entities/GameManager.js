@@ -19,24 +19,6 @@ game.GameTimeManager = Object.extend({
 		this.goldTimerCheck();
 		this.creepTimerCheck();
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//enemy hero hack
-		if(game.data.enemyHero.dead){
-			//takes the player off the screen
-			me.game.world.removeChild(game.data.enemyHero);
-			//runs the resetPlayer function
-			me.state.current().resetPlayer(10, 0);
-
-		}
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//pause hack
-		// if (me.input.isKeyPressed("pause")) {
-		// 	this.pauseGame();
-		// }
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 		//updates
 		return true;
 	},
@@ -56,10 +38,8 @@ game.GameTimeManager = Object.extend({
 			this.lastCreep = this.now;
 			//creates and inserts creeps into world
 			var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
-			var creepf = me.pool.pull("FriendCreep", 0, 0, {});
 			//adds the creeps to the world
 			me.game.world.addChild(creepe, 5);
-			me.game.world.addChild(creepf, 5);
 		} 
 	}
 });
@@ -89,32 +69,29 @@ game.ExperienceManager = Object.extend({
 		this.alwaysUpdate = true;
 		this.gameover = false;
 	},
-
 	update: function(){
 		if (game.data.win === true && !this.gameover) {
-			this.gameOver(true);
+			this.gameover(true);
 		}
 		else if (game.data.win === false && !this.gameover) {
-			this.gameOver(false);
+			this.gameover(false);
 		}
+
+		console.log(game.data.exp);
 		return true;
 	},
 
-	gameOver: function(win){
-		if (win) {
-			//adds 10 the the exp variable
+	gameover: function(win){
+		if(win){
 			game.data.exp += 10;
 		}
 		else{
-			//adds 1 the the exp variable
 			game.data.exp += 1;
 		}
-		console.log(game.data.exp);
-		console.log(game.data.exp2);
-		//says game's over
+		
 		this.gameover = true;
-		//saves the value of the exp variable
 		me.save.exp = game.data.exp;
+		//testing purposes  
 		me.save.exp2 = 4;
 	}
 });

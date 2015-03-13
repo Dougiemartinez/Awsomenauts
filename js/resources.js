@@ -13,7 +13,7 @@ game.resources = [
         {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
         {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
         {name: "title-screen", type:"image", src: "data/img/title.png"},
-        {name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
+        {name: "title-screen", type:"image", src: "data/img/loadpic.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
@@ -25,14 +25,18 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
         //this code below lets us load or map we made in tiled
-        {name: "map", type: "tmx", src: "data/map/map.tmx"}
+        {name: "map", type: "tmx", src: "data/map/map.tmx"},
 
 
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
+         * 
 	 */	
-
+        {name: "bruno1", type: "audio", src: "data/bgm/"},
+        {name: "carey1", type: "audio", src: "data/bgm/"},
+        {name: "blankSpace", type: "audio", src: "data/bgm/"},
+        {name: "viceroy", type: "audio", src: "data/bgm/"},
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}

@@ -14,7 +14,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		//calls the resetPlayer function with the parameters 0 and 420
 		this.resetPlayer(0, 420);
 		//calls the resetPlayer function with the parameters 0 and 420
-		this.resetEnemy(900, 420);
+		//this.resetEnemy(900, 420);
 		//adds gamemanager to world
 		var heroDeathManager = me.pool.pull("HeroDeathManager", 0 , 0, {});
 		//puts gamemanager into world
@@ -60,6 +60,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
+                me.audio.playTrack("viceroy");
 	},
 
 
